@@ -1,0 +1,4 @@
+[submodule "juliancritchfieldSRF/SpotterOdoo/AddOns"]
+	path = juliancritchfieldSRF/SpotterOdoo/AddOns
+	url = git@github.com:juliancritchfieldSRF/SpotterOdoo.git
+	branch = master
