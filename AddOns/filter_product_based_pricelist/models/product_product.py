@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of CorTex IT Solutions Ltd.. See LICENSE file for full copyright and licensing details.
+# Julian added comments to force a rebuild
 
 from odoo import api, models
 import logging
