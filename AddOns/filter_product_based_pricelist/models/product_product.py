@@ -1,11 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of CorTex IT Solutions Ltd.. See LICENSE file for full copyright and licensing details.
-# Julian added comments to force a rebuild
 
 from odoo import api, models
-import logging
-
-_logger = logging.getLogger(__name__)
 
 class ProductProduct(models.Model):
     _inherit = "product.product"
@@ -16,7 +12,6 @@ class ProductProduct(models.Model):
         product_tmpl_list = []
         price_list_global= False
         pricelist = self.env['product.pricelist'].browse(self._context.get('pricelist'))
-        _logger.error("Filter product Calling")
         if pricelist:
             for record in pricelist.item_ids:
                 if record.applied_on == '3_global':
@@ -39,6 +34,5 @@ class ProductProduct(models.Model):
             elif product_tmpl_list:
                 args += [('product_tmpl_id', 'in',
                           product_tmpl_list)]
-            _logger.error("Filter product args%s"%args)
         return super(ProductProduct, self)._search(args, offset=offset, limit=limit, order=order, count=count,access_rights_uid=access_rights_uid)
 
