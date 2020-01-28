@@ -3,7 +3,7 @@
 
 {
     'name': "Filter Products Based on Pricelist",
-    'version': "13.0.1.1.0",
+    'version': "13.0.1.1.1",
     'summary': "Filter products based on selected pricelist in Sale Order",
     'category': 'Sale',
     'description': """
@@ -16,7 +16,7 @@
     'website': 'https://cortexsolutions.net',
     'license': 'OPL-1',
     'currency': 'EUR',
-    'price': 20,
+    'price': 15,
     'support': 'support@cortexsolutions.net',
     'depends': ['sale_management', 'product'],
     'data': [],

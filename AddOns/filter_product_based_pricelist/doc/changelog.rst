@@ -1,3 +1,7 @@
+v1.1.1
+======
+ - Solve issue when Product Configurator and Product Configurator settings are enabled in sales app.
+
 v1.1.0
 ======
  - Make module works with price lists applied to product, product variant, product category,global.
