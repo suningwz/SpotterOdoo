@@ -3,20 +3,22 @@
 
 {
     'name': "Filter Products Based on Pricelist",
-    'version': "13.0.1.1.1",
+    'version': "13.0.1.1.2",
     'summary': "Filter products based on selected pricelist in Sale Order",
     'category': 'Sale',
     'description': """
          This module allows you to select only those products which are assigned to the selected pricelist in Sale Order (SO).
-         Sale order filter product
-         filter products in sale order
-         filter products based on pricelist 
+Sale order filter product
+filter products in sale order
+filter products based on pricelist 
+pricelist filter
+sale order filter product  
     """,
     'author': 'CorTex IT Solutions Ltd.',
     'website': 'https://cortexsolutions.net',
     'license': 'OPL-1',
     'currency': 'EUR',
-    'price': 15,
+    'price': 20,
     'support': 'support@cortexsolutions.net',
     'depends': ['sale_management', 'product'],
     'data': [],

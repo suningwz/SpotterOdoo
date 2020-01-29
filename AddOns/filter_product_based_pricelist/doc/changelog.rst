@@ -1,3 +1,7 @@
+v1.1.2
+======
+ - Solve issue when use search more, it was showing all products.
+
 v1.1.1
 ======
  - Solve issue when Product Configurator and Product Configurator settings are enabled in sales app.
