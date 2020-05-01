@@ -151,7 +151,7 @@
 							attrs="{'required': [('jira_project', '=', True), ('id', '=', False)],
                                                                   'invisible': [('jira_project', '=', False)]}"
 							options="{'no_create': 1, 'no_create_edit': 1}"
-							domain="[('project_type_id', '=', project_type_id)]" />
+							 />
 						<field name="category_id" />
 					</group>
 					<group>
@@ -301,7 +301,7 @@
 					<group>
 						<field name="project_template_id" required="1"
 							options="{'no_create': 1, 'no_create_edit': 1, 'no_open': 1}"
-							domain="[('project_type_id', '=', project_type_id)]"
+							
 							attrs="{'invisible': [('jira_project', '=', False)],
                                'required': [('jira_project', '!=', False)]}" />
 						<field name="user_id" required="1"
