@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="sales_team_form_view_in_crm_customization" model="ir.ui.view">
+        <field name="name">crm.team.form.customization</field>
+        <field name="model">crm.team</field>
+        <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+        <field name="priority">12</field>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Sales Targets">
+                    <group colspan="12">
+                        <field name="x_goals_lines" widget="one2many" colspan="12" nolabel="1">
+                            <tree string="Monthly Goals" editable="bottom" limit="12" default_order="x_goal_year desc, x_goal_month asc">
+                                <field name="x_goal_month" string="Month" />
+                                <field name="x_goal_year" string="Year" />
+                                <field name="x_goal_amount" string="Amount" />
+                                <field name="x_total_reached" readonly="1"/>
+                                <field name="x_total_remaining" readonly="1"/>
+                            </tree>
+                        </field>
+                    </group>
+                    <group style="text-align: right;">
+                        <button name="refresh_total" string="Refresh Sales Data" type="object"></button>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="sales_team_graph_view" model="ir.ui.view">
+        <field name="name">sales_team_graph_view</field>
+        <field name="model">crm.sales_goals_line</field>
+        <field name="arch" type="xml">
+            <graph string="Sales Dashboard">
+                <field name="x_total_reached"  type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="sales_team_goal_list">
+      <field name="name">Sales Goals</field>
+      <field name="model">crm.sales_goals_line</field>
+      <field name="arch" type="xml">
+        <tree>
+            <field name="x_team_id" />
+            <field name="x_goal_month" />
+            <field name="x_goal_year" />
+            <field name="x_total_remaining" />
+            <field name="x_total_reached" />
+        </tree>
+      </field>
+    </record>
+
+    <record id="sales_team_graph_search" model="ir.ui.view">
+        <field name="name">crm.sales_goals_linel.search</field>
+        <field name="model">crm.sales_goals_line</field>
+        <field name="arch" type="xml">
+            <search>
+                <filter string="This Month" name="goals_this_month" domain="[('x_goal_month', '=', str(datetime.datetime.now().month)), ('x_goal_year', '=', str(datetime.datetime.now().year))]" />
+                <filter string="Q1" name="goals_q1" domain="[('x_goal_month', 'in', ['01', '02', '03']), ('x_goal_year', '=', str(datetime.datetime.now().year))]" />
+                <filter string="Q2" name="goals_q2" domain="[('x_goal_month', 'in', ['04', '05', '06']), ('x_goal_year', '=', str(datetime.datetime.now().year))]" />
+                <filter string="Q3" name="goals_q3" domain="[('x_goal_month', 'in', ['07', '08', '09']), ('x_goal_year', '=', str(datetime.datetime.now().year))]" />
+                <filter string="Q4" name="goals_q4" domain="[('x_goal_month', 'in', ['10', '11', '12']), ('x_goal_year', '=', str(datetime.datetime.now().year))]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="sales_team_graph_action" model="ir.actions.act_window">
+        <field name="name">Sales Dashboard</field>
+        <field name="res_model">crm.sales_goals_line</field>
+        <field name="view_mode">graph,tree</field>
+        <field name="search_view_id" ref="sales_team_graph_search"/>
+        <field name="view_ids"
+                   eval="[(5, 0, 0),
+                          (0, 0, {'view_mode': 'graph', 'view_id': ref('sales_team_graph_view')})]"/>
+    </record>
+    
+    <menuitem 
+        name="Sales Dashboard" 
+        id="menu_report_sales_team_dashboard"
+        parent="crm.crm_menu_sales"
+        action="sales_team_graph_action" />
+    
+</odoo>
