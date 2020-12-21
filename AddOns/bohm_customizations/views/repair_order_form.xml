@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <record id="repair_order_form_customization" model="ir.ui.view">
+        <field name="name">repair.order.form.customization</field>
+        <field name="model">repair.order</field>
+        <field name="inherit_id" ref="repair.view_repair_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_validate']" position="after"> 
+                <button name="set_to_waiting" string="Set to Waiting" states="draft" type="object" class="oe_highlight"/>
+            </xpath>
+            <xpath expr="//header" postion="inside">
+                <button name="set_to_draft" string="Set to Quotation" states="waiting" type="object" class="oe_highlight"/>
+            </xpath>            
+        </field>
+    </record>
+</odoo>
