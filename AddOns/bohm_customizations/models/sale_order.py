@@ -14,8 +14,12 @@ class BohmCustomSaleOrder(models.Model):
         res = super(BohmCustomSaleOrder, self).write(vals)
         try:
             if self.opportunity_id:
-                if self.opportunity_id.stage_id.id == 6 and self.id == self.opportunity_id.order_ids[0].id:
-                    self.opportunity_id.planned_revenue = self.amount_total
+                conditions = [('opportunity_id', '=', self.opportunity_id.id),('state', '!=', 'cancel')]
+                if vals.get('state') == 'cancel':
+                    conditions.append(('id', '!=', self.id))  
+                sale_order = self.env['sale.order'].search(conditions, order='write_date desc', limit=1)
+                if self.opportunity_id.stage_id.id == 6:
+                    self.opportunity_id.planned_revenue = sale_order.amount_total
         except:
             pass
 
