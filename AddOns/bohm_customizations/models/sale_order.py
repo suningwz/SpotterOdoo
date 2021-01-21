@@ -19,7 +19,7 @@ class BohmCustomSaleOrder(models.Model):
                     conditions.append(('id', '!=', self.id))  
                 sale_order = self.env['sale.order'].search(conditions, order='write_date desc', limit=1)
                 if self.opportunity_id.stage_id.id == 6:
-                    self.opportunity_id.planned_revenue = sale_order.amount_total
+                    self.opportunity_id.sudo().write({'planned_revenue': sale_order.amount_total})
         except:
             pass
 

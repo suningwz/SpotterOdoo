@@ -25,13 +25,13 @@ class CustomCrmTeam(models.Model):
             end_month = self.last_day_of_month(datetime.date(
                 int(record.x_goal_year), int(record.x_goal_month), 1))
 
-            sales = record.env['sale.order'].search([('team_id', '=', record.x_team_id.name), ('state', 'in', ['sale', 'done']), (
-                'date_order', '>=', start_month), ('date_order', '<=', end_month)])
+            leads = record.env['crm.lead'].search([('team_id', '=', record.x_team_id.id), ('stage_id.is_won', '=', True), (
+                'date_closed', '>=', start_month), ('date_closed', '<=', end_month)])
 
             total = 0
 
-            for sale in sales:
-                total += sale.amount_total
+            for lead in leads:
+                total += lead.planned_revenue
 
             record.x_total_reached = total
             record.x_total_remaining = record.x_goal_amount - record.x_total_reached
