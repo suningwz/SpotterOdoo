@@ -23,7 +23,7 @@ class CustomRepairOrder(models.Model):
 
     x_team_id = fields.Many2one(
         comodel_name="crm.team",
-        string="Sales Team"
+        string="Salesperson"
     )
 
     def set_to_waiting(self):
