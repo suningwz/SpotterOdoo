@@ -23,9 +23,12 @@ class CustomCrmLead(models.Model):
                     _('An Opportunity cannot be "won" or in PO received without a quotation!'))
             else:
                 try:
+                    total = 0
                     sale_order = self.env['sale.order'].search(
-                        [('opportunity_id', '=', self.id), ('state', '!=', 'cancel')], order='write_date desc', limit=1)
-                    self.planned_revenue = sale_order.amount_total
+                        [('opportunity_id', '=', self.id), ('state', '!=', 'cancel')])
+                    for order in sale_order:
+                        total += order.amount_total
+                    self.planned_revenue = total
                 except:
                     pass
 
