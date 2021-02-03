@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-         <record id="bohm_helpdesk_ticket_form_customizations" model="ir.ui.view">
-            <field name="name">bohm.helpdesk.ticket.customization.form.inherit</field>
+        <record id="bohm_helpdesk_ticket_view_form" model="ir.ui.view">
+            <field name="name">bohm.helpdesk.ticket.form.inherit</field>
             <field name="model">helpdesk.ticket</field>
             <field name="inherit_id" ref="helpdesk.helpdesk_ticket_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/group[1]/group[2]" position="inside">
-                    <label><strong>Support Information</strong></label>
-                    <h5><field name="x_serial_has_warranty" /></h5>
-                    
+                   <field name="x_serial_has_warranty" />
                 </xpath>
             </field>
         </record>

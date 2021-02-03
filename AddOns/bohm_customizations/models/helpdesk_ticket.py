@@ -45,7 +45,7 @@ class CustomHelpdeskTicket(models.Model):
                         text += no_support
                 elif old_serial:
                     text += '<strong>Legacy SKU</strong><br>'
-                    text += 'Warranty Expiration Date: ' + \
+                    text += 'Warranty Expiration: ' + \
                         str(old_serial.x_warranty_date.strftime("%m-%d-%Y"))
                 else:
                     text = '<strong>Could not find warranty information for this serial.</strong>'
