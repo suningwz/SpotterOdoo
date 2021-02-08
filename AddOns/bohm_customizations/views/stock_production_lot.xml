@@ -8,6 +8,13 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='ref']" position="after">
                 <field name="x_warranty_date" />
+                <field name="x_linked_subscriptions" widget="many2many">
+                    <tree>
+                        <field name="display_name"/>
+                        <field name="date_start"/>
+                        <field name="date"/>
+                    </tree>
+                </field>
             </xpath>
         </field>
     </record>
