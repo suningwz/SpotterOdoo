@@ -8,13 +8,18 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='ref']" position="after">
                 <field name="x_warranty_date" />
-                <field name="x_linked_subscriptions" widget="many2many">
-                    <tree>
-                        <field name="display_name"/>
-                        <field name="date_start"/>
-                        <field name="date"/>
-                    </tree>
-                </field>
+            </xpath>
+            <xpath expr="//page[@name='description']" position="after">
+                <page string="Attached Subscriptions">
+                    <field name="x_linked_subscriptions" widget="many2many" readonly="1">
+                        <tree>
+                            <field name="display_name" string="Subscription Name"/>
+                            <field name="partner_id" />
+                            <field name="date_start" string="Warranty Start"/>
+                            <field name="date" string="Warranty Expiration"/>
+                        </tree>
+                    </field>
+                </page>
             </xpath>
         </field>
     </record>
