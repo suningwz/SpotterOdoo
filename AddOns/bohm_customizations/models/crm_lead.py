@@ -24,9 +24,12 @@ class CustomCrmLead(models.Model):
             else:
                 try:
                     total = 0
-                    sale_order = self.env['sale.order'].search(
-                        [('opportunity_id', '=', self.id), ('state', '!=', 'cancel')])
-                    for order in sale_order:
+                    sale_orders = self.env['sale.order'].search(
+                        [('opportunity_id', '=', self.id), ('state', '=', 'done')])
+                    if not len(sale_orders):
+                        sale_orders = self.env['sale.order'].search(
+                            [('opportunity_id', '=', self.id), ('state', '!=', 'cancel')])
+                    for order in sale_orders:
                         total += order.amount_total
                     self.planned_revenue = total
                 except:
