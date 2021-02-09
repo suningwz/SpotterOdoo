@@ -35,4 +35,20 @@ class CustomCrmLead(models.Model):
                 except:
                     pass
 
-        return super(CustomCrmLead, self).write(vals)
+        super(CustomCrmLead, self).write(vals)
+
+        if vals.get('partner_id'):
+            try:
+                self.action_assign_partner()
+            except:
+                pass
+        return
+
+    def create(self, vals):
+        res = super(CustomCrmLead, self).create(vals)
+        try:
+            res.action_assign_partner()
+        except:
+            pass
+
+        return res
