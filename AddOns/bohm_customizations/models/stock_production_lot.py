@@ -15,3 +15,14 @@ class CustomStockProductionLot(models.Model):
 
     x_linked_subscriptions = fields.Many2many(
         'sale.subscription', string="Linked Subscriptions")
+
+    def update_subscriptions(self):
+        all_serials = self.search([('sale_order_ids', '!=', False)])
+        for serial in all_serials:
+            sale_orders = serial.sale_order_ids
+            for sale in sale_orders:
+                lines = self.env['sale.order.line'].search(
+                    [('order_id', '=', sale.id), ('subscription_id', '!=', False)])
+
+                for line in lines:
+                    serial.x_linked_subscriptions += line.subscription_id
