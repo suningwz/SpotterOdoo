@@ -37,7 +37,7 @@ class CustomCrmLead(models.Model):
                 try:
                     total = 0
                     sale_orders = self.env['sale.order'].search(
-                        [('opportunity_id', '=', self.id), ('state', '=', 'done')])
+                        [('opportunity_id', '=', self.id), ('state', 'in', ['done', 'sale'])])
                     if not len(sale_orders):
                         sale_orders = self.env['sale.order'].search(
                             [('opportunity_id', '=', self.id), ('state', '!=', 'cancel')])

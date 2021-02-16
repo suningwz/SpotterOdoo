@@ -23,7 +23,7 @@ class BohmCustomSaleOrder(models.Model):
         if self.opportunity_id:
             total = 0
             sale_orders = self.env['sale.order'].search(
-                [('opportunity_id', '=', self.opportunity_id.id), ('state', '=', 'done')])
+                [('opportunity_id', '=', self.opportunity_id.id), ('state', 'in', ['done', 'sale'])])
             if not len(sale_orders):
                 sale_orders = self.env['sale.order'].search(
                     [('opportunity_id', '=', self.opportunity_id.id), ('state', '!=', 'cancel')])
