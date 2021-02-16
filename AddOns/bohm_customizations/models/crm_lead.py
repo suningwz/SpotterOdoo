@@ -11,6 +11,18 @@ class CustomCrmLead(models.Model):
     _name = 'crm.lead'
     _inherit = 'crm.lead'
 
+    x_can_update = fields.Boolean(
+        'Can Update',
+        compute="_compute_can_update"
+    )
+
+    @api.depends('stage_id')
+    def _compute_can_update(self):
+        if not self.env.user.has_group('base.user_admin') and self.stage_id.is_won:
+            self.x_can_update = False
+        else:
+            self.x_can_update = True
+
     def write(self, vals):
         if self.stage_id.id == 6 and not self.env.user.has_group('base.user_admin') and vals.get('stage_id'):
             raise ValidationError(
