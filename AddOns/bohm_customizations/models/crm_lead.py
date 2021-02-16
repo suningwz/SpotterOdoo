@@ -55,12 +55,3 @@ class CustomCrmLead(models.Model):
             except:
                 pass
         return
-
-    def create(self, vals):
-        res = super(CustomCrmLead, self).create(vals)
-        try:
-            res.action_assign_partner()
-        except:
-            pass
-
-        return res
