@@ -12,7 +12,8 @@
     'depends': ['repair'],
     'data': [
         'security/ir.model.access.csv',
-        'views/repair_order_form.xml'
+        'views/repair_order_form.xml',
+        'views/documents_document_form.xml'
     ],
     'application': True,
 }
