@@ -11,13 +11,14 @@ class BohmCustomSaleOrder(models.Model):
     _inherit = 'sale.order'
 
     def write(self, vals):
-        res = super(BohmCustomSaleOrder, self).write(vals)
-        try:
-            self.update_leads()
-        except:
-            pass
+        for record in self:
+            res = super(BohmCustomSaleOrder, record).write(vals)
+            try:
+                record.update_leads()
+            except:
+                pass
 
-        return res
+            return res
 
     def update_leads(self):
         if self.opportunity_id:

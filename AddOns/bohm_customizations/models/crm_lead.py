@@ -24,34 +24,35 @@ class CustomCrmLead(models.Model):
             self.x_can_update = True
 
     def write(self, vals):
-        if self.stage_id.id == 6 and not self.env.user.has_group('base.user_admin') and vals.get('stage_id'):
-            raise ValidationError(
-                _('You do not have permission to move Won opportunites, please contact an Admin!')
-            )
-
-        if vals.get('stage_id') == 6:
-            if len(self.order_ids) < 1 and not self.message_main_attachment_id:
+        for record in self:
+            if record.stage_id.id == 6 and not record.env.user.has_group('base.user_admin') and vals.get('stage_id'):
                 raise ValidationError(
-                    _('An Opportunity cannot be "won" or in PO received without a quotation!'))
-            else:
+                    _('You do not have permission to move Won opportunites, please contact an Admin!')
+                )
+
+            if vals.get('stage_id') == 6:
+                if len(record.order_ids) < 1 and not record.message_main_attachment_id:
+                    raise ValidationError(
+                        _('An Opportunity cannot be "won" or in PO received without a quotation!'))
+                else:
+                    try:
+                        total = 0
+                        sale_orders = record.env['sale.order'].search(
+                            [('opportunity_id', '=', record.id), ('state', 'in', ['done', 'sale'])])
+                        if not len(sale_orders):
+                            sale_orders = record.env['sale.order'].search(
+                                [('opportunity_id', '=', record.id), ('state', '!=', 'cancel')])
+                        for order in sale_orders:
+                            total += order.amount_total
+                        record.planned_revenue = total
+                    except:
+                        pass
+
+            super(CustomCrmLead, record).write(vals)
+
+            if vals.get('partner_id'):
                 try:
-                    total = 0
-                    sale_orders = self.env['sale.order'].search(
-                        [('opportunity_id', '=', self.id), ('state', 'in', ['done', 'sale'])])
-                    if not len(sale_orders):
-                        sale_orders = self.env['sale.order'].search(
-                            [('opportunity_id', '=', self.id), ('state', '!=', 'cancel')])
-                    for order in sale_orders:
-                        total += order.amount_total
-                    self.planned_revenue = total
+                    record.action_assign_partner()
                 except:
                     pass
-
-        super(CustomCrmLead, self).write(vals)
-
-        if vals.get('partner_id'):
-            try:
-                self.action_assign_partner()
-            except:
-                pass
-        return
+            return
