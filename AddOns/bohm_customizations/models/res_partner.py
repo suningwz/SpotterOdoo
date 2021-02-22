@@ -69,7 +69,6 @@ class CustomResPartner(models.Model):
     def action_view_opportunity(self):
         action = self.env.ref('crm.crm_lead_opportunities').read()[0]
         domain = self.get_opp_domain(self)
-        if len(domain):
-            domain.append(('type', '=', 'opportunity'))
-            action['domain'] = domain
+        domain.append(('type', '=', 'opportunity'))
+        action['domain'] = domain
         return action
